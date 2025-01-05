@@ -3,12 +3,10 @@ import numpy as np
 import glob
 import imutils
 
-# 載入模板
 template = cv2.imread("ppp.png", 0)
 template = cv2.Canny(template, 50, 200)
 (tH, tW) = template.shape[:2]
 
-# 遍歷目標圖片
 for imagePath in glob.glob("images/*.jpg"):
     image = cv2.imread(imagePath)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -18,7 +16,6 @@ for imagePath in glob.glob("images/*.jpg"):
         resized = imutils.resize(gray, width=int(gray.shape[1] * scale))
         r = gray.shape[1] / float(resized.shape[1])
 
-        # 當模板超出圖片大小時停止
         if resized.shape[0] < tH or resized.shape[1] < tW:
             break
 
